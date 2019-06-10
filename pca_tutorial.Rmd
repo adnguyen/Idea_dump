@@ -1,0 +1,18 @@
+---
+title: "Untitled"
+output: html_document
+---
+```{r}
+a<-rnorm(100,10,10)
+b<-rnorm(100,10,10)
+c<-rnorm(100,10,10)
+d<-rnorm(100,10,10)
+dat<-data.frame(scale(data.frame(a,b,c,d)))
+dat
+pdat<-princomp(dat)
+pdat
+
+
+pc1_individual1<- (0.658*-0.006268962)+(-.382*-0.2424338)+(0.584*-1.281065)+(-.282*2.799683);pc1_individual1
+```
+
