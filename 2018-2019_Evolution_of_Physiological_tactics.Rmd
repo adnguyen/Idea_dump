@@ -1,0 +1,187 @@
+---
+title: "Evolution of Physiological Tactics"
+output: 
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE,warning=FALSE,message=FALSE}
+library(ggplot2)
+library(gridExtra)
+T<-theme_bw()+theme(text=element_text(size=10),axis.text=element_text(size=15),
+                    legend.text=element_text(size=15),panel.grid.major=element_blank(),
+                    legend.position="none",panel.grid.minor.x = element_blank(),
+                    panel.grid = element_blank(),legend.key = element_blank(),axis.text.x=element_blank(),axis.text.y=element_blank(),plot.title=element_text(hjust=0.5))
+```
+
+
+# The Evolution of the resistance and tolerance to stress 
+
+
+
+## Set up: Why we need to understand how organisms cope with stress.
+
+**Inform whether they are resilient or susceptible to environmental change.** 
+
+Offsets from ancestral environmental conditions creates mismatches between organism and environment. 
+
+Environments can perturb animals, reducing fitness. Specifically, stress damages macromolecules, disrupting cellular activity. 
+
+
+
+## Problem or Need Statement: 
+
+**The way we refer to how organisms cope with stress severely impacts our understanding of the physiological and molecular strategies/tactics of stress hardiness.**
+
+For example: thermal tolerance refers to the ability of an organisms to withstand both low and high temperatures.  However, coping with stress can involve not only tolerance mechanisms, but also resistance. 
+
+The field would benefit from the herbivore damage literature. 
+
+**Tolerance** - physiological changes in response to environmental perturbations that maintains fitness.
+
+**Resistance** - physiological mechanisms that reduces damage from environmental perturbations. 
+
+A big problem in transcriptomic studies: cant tell the difference between resistance vs tolerance -- need reaction norm approach
+
+
+
+### Types of Perturbations: Press vs Pulse (Edward Bender 1980)
+
+
+
+Press perturbations is consistent damage. 
+
+- thermal damage - slow ramping 
+- performance under herbivore damage 
+- performance under parasite load
+
+
+
+Pulse perturbation is intermittant damage.
+
+- thermal shock, rapid cold/heat treatment - lends itself to investigating recovery mechanisms 
+- initial herbivore damage
+- initial parasite infection 
+
+Note: There can be things in between pulse and press: intermediate heat ramping protocols. The central read out for heat damage is proteome stability.
+
+
+
+#### Types of patterns to expect from data, pulse or press     
+
+```{r,echo=FALSE}
+
+### Differences in resistance 
+x<-rep(seq(1:10),2)
+y<-c(10,10,10,10,9,8,7,6,5,4,10,10,9,8,7,6,5,4,3,2)
+genotype<-c(rep("A",10),rep("B",10))
+
+p<-data.frame(x,y,genotype)
+
+a0<-ggplot(p,aes(x,y,colour=genotype))+geom_point(size=5)+geom_line(size=2)+xlab("Environmental Gradient")+ylab("Fitness")+T+scale_color_manual(values=c("blue","red"))+ggtitle("different resistance, different tolerance")
+
+# simple reduction in resistance impacts tolerance 
+
+### Same resistance, different tolerance
+
+x1<-rep(seq(1:10),2)
+y1<-c(9,9,9,9,7,5,3,2,1,0,9,9,9,9,8,7,6,5,4,3)
+genotype<-c(rep("A",10),rep("B",10))
+p1<-data.frame(x1,y1,genotype)
+
+a1<-ggplot(p1,aes(x1,y1,colour=genotype))+geom_point(size=5)+geom_line(size=2)+xlab("Environmental Gradient")+ylab("Fitness")+T+scale_color_manual(values=c("blue","red"))+ggtitle("Same resistance, different tolerance")
+
+
+# Same resistance , difference in starting tolernace
+
+x2<-rep(seq(1:10),2)
+y2<-c(10,10,10,10,9,8,7,6,5,4,9,9,9,9,8,7,6,5,4,3)
+genotype<-c(rep("A",10),rep("B",10))
+p2<-data.frame(x2,y2,genotype)
+
+a2<-ggplot(p2,aes(x2,y2,colour=genotype))+geom_point(size=5)+geom_line(size=2)+xlab("Environmental Gradient")+ylab("Fitness")+T+scale_color_manual(values=c("blue","red"))+ggtitle("Same resistance, different tolerance")
+
+## difference in resistance and tolerance 
+x3<-rep(seq(1:10),2)
+y3<-c(10,10,10,10,9,8,7,6,5,4,9,9,9,9,9,9,8,7,6,5)
+genotype<-c(rep("A",10),rep("B",10))
+p3<-data.frame(x3,y3,genotype)
+
+a3<-ggplot(p3,aes(x3,y3,colour=genotype))+geom_point(size=5)+geom_line(size=2)+xlab("Environmental Gradient")+ylab("Fitness")+T+scale_color_manual(values=c("blue","red"))+ggtitle("different resistance, different tolerance")
+
+grid.arrange(a0,a3,a1,a2,nrow=2,ncol=2)
+
+```
+
+
+## Evolutionary tactics for stress resistance
+
+Selection favors stress resistance mechanisms when stress is constant throughout a lifetime. 
+
+Cost- allocation cost whereby investing in defenses or elevating stress resistant mechanisms comes at the cost of other life history traits such as growth. 
+
+Benefit - Takes more stress to disrupt biological activity
+
+
+
+Tactics
+
+- High baseline ("Front loading") investment in protective molecules.
+
+## Evolutionary tactics for stress tolerance
+
+Selection favors stress tolerance mechanisms when stress is variable within a lifetime. 
+
+Cost- costs energy to turn on a response 
+
+Benefit- the response enables the organism to cope with the environmental condition 
+
+
+
+Tactics
+
+- When perturbed, increase magnitude of protective molecules. 
+
+---
+
+---
+
+
+
+## Molecular level : 
+
+Phenotype: environmental limits (thermal limits, drought limits, )
+
+Resistance - Environmental range where  key macromolecules do not change 
+
+Tolerance - Environmental range wherw macromolecules changing during and after 
+
+
+
+So should we be thinking about what a particular molecule is doing for the organism? THe molecule itself is resistant or tolerant? 
+
+
+
+Is this just understanding phenotypic plasticity of a given molecule? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

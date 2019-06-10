@@ -1,0 +1,158 @@
+---
+title: "Bayesian Analysis"
+output: 
+  html_document: 
+    toc: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+**Learning bayesian statistics**    
+
+
+# Lecture 1
+
+* https://www.youtube.com/watch?v=oy7Ks3YfbDg&list=PLDcUM9US4XdM9_N6XUUFrhghGJ4K25bFc
+
+Humans are bad at counting, instead we use "Golems" which are machines that can do the counting itself. But we then need to inspect the golems. 
+
+
+# Lecture 2 
+
+* https://www.youtube.com/watch?v=IFRAKBArIyM
+
+Counts to plausibility 
+```{r}
+ways<-c(3,8,9)
+ways/sum(ways)
+
+sum(ways/sum(ways))
+```
+
+Plausibility is probability: set of non-negative real numbers that sum to one
+
+Probability theory is just a set of shorcuts for counting possibilities.   
+
+## Building a model  
+
+How to use probability to do a typical statistical modeling? 
+
+1. Design the model (data story)
+2. Condition on the data (update)
+3. Evaluate the model (critique)
+
+**example**
+
+Take a globe and toss it 9 times. And wherever your finger lands, you count land (L) or water (W). 
+
+**WLWWWLWLW**
+
+* Data story motivates the model: How do the data arise? 
+* For **WLWWWLWLW**: 
+  * some true proportion of water, p
+  * Toss globe, probabilty p of observing W, 1-p of L
+  * Each toss therefore independent of other tosses 
+* Translate data story into probability statements
+
+Assumptions-
+* No Correlation between tosses 
+* Tossing has no bias
+
+
+Law of total probability , stuff has to sum to 1. Product rule, happen together, multiply. Sum rule, things that are alternatives, add. 
+
+### Design the model
+
+Bayesian Updating- defines optimal learning in small world, converts prior to posterior. 
+* priors can come from philsophy or previous data   
+  * priors can be flat - uniform, but not reasonable in all cases    
+* give your golem an information state, before the data: Here an initial confidence is each possible value of p between zero and one    
+* Condition on data to update information state: New confidence in each value of p, condition on the data.    
+
+### Condition the model
+
+* Data order irrelevant because computer assumes so.    
+  * All-at-once, one-at-atime, shuffled order all give the same posterior   
+* Every posterior is a prior for the next observation   
+* Every prior is posterioer of some other inference   
+
+
+### Evaluate 
+
+Bayesian inference: logical answer to a question in the form of a model    
+
+" How Plausible is each proportion of water, given these data? "   
+
+Computer/Golem mst be supervised:    
+
+* Malfunctioned?   
+* answer make sense?   
+* does question make sense?   
+* check sensitivity of answer to changes in assumptions   
+
+
+## Construction Perspective 
+
+* Build joint model:   
+
+  * List variables: data and parameters   
+  * assign data distribution (likelihood)  
+  * Assign parameter distribution (prior)   
+ 
+* Input: Joint prior   
+* Deduce: Joint posterior    
+
+Variables and parametesrs   
+
+n = number of globe tosses   
+
+$n_{w}$ = number of water landings   
+
+p = proportion of water on globe   
+
+n and $n_{w}$  can be observed   
+
+Other parameters cannot be observed , p    
+
+  * define targets of inference, what is updated     
+  * these were the conjectures in the bag example     
+  
+Which are data and which are parameters depend upon context and question   
+
+ie. mark-recature: know $n_{w}$ , must infer n, p    
+
+
+### Data model: Likelihood  
+
+Pr(data|assumptions)    
+
+  * Defines probability of each observation, condition on assumptions   
+  * relative count of number of ways of seeing data, given a particular conjecture   
+  * This case, binomial probability:     
+  
+
+$Pr(n_{w}|n,p) = \frac{n!}{n_{w}(n-n_{w})!}p^{n_{w}(1-p)^{n-n_{w}}}$
+
+* $n_{w}$ = count W  
+* n = number of tosses 
+* p = Probability of W
+
+
+So what is the probability of the number of W (data) given the number of tosses and probability of W. *Count W is the probability distribution of the data.* Counting up ways the data can happen. The count of W's is distributed binomially, with probabilyt p of a W on each toss and n tosses total. 
+
+
+How do we make computers to do this? 
+
+dbinom() calculates binomial distribution
+
+```{r}
+dbinom(6,size=9,prob=0.5)
+
+
+```
+
+### Parameter model 
+
+* What the golem beleives beefore the data
+* Likelihood and prior define prior predictive distribution 
+* more on this later 

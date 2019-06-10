@@ -1,0 +1,100 @@
+---
+title: "Proteostasis"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r}
+library(DiagrammeR)
+```
+
+
+
+```{r}
+mermaid("
+graph TD
+  A[Proteostasis] --> B[Expression]
+  B --> Z(Translation)
+  B --> V(Protein-Protein Interactions)
+  V --> P[Degradation]
+  A --> C[Stability]
+  C --> D(Protein-Protein Interactions)
+  D --> O[Protective]
+  O --> L[Chaperones, Hsps]
+  D --> U[Damaging]
+  U --> Y[Aggregation]
+  C --> E[Thermal Stability, melting point]
+  B -->C
+  C --> B
+")
+
+
+```
+
+
+
+```{r}
+
+mermaid("
+graph TD
+  A{Proteostasis} --> B[Abundance]
+  A --> C[Function]
+  C --> D[Intrinsic Stability]
+  D --> a{Folded}
+  D --> b[Denatured]
+  b -->pp{Aggregation}
+  C --> E[Protein-Protein Interactions]
+  B --> E        
+  E --> pp      
+  E --> Z[Translation]
+  E --> T[Break Down]
+  T --> I(Proteasome)
+  T --> R
+  R(Autophagy) --> P{Protein Recycling} 
+  I --> P
+  E --> H[Rescue]    
+  H --> J[Molecular Chaperoning]
+  J --> S(Hsp- mediated)
+  J --sugars, sugar alcohols--> W(Osomolytes)
+  S --irreparable damage--> I
+  S --> K{Folded}
+  W --> K
+  
+")
+
+
+```
+
+
+
+```{r}
+
+
+mermaid("
+graph TD
+  A{Proteostasis} --> B[Abundance and Stability of Proteins]
+  B --> d[Folded]  
+  B --> C[Denatured]
+  C --> X[Unfolded or Misfolded or Aggregations]
+  X --> T[Break Down]  
+  T --> I(Proteasome)
+  R(Autophagy) --> P{Protein Recycling} 
+  T --> R
+  I --> P
+  X --> O[Altered Expression]
+  O --> Z[Lower Translation]    
+  O --> M[Alternative Splicing]
+  X --> H[Rescue]      
+  H --> J[Molecular Chaperoning]
+  J --> S(Hsp- mediated)
+  J --sugars, sugar alcohols--> W(Osomolytes)
+  S --irreparable damage--> I
+  S --> D[Folded]
+  W --> D
+
+  
+")
+
+
+```
